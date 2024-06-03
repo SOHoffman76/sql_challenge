@@ -1,5 +1,24 @@
-# sql_challenge
-Pewlett Hackard employee research
+# sql_challenge - Pewlett Hackard employee research
+# Shannon Hoffman
+# README file
+
+# Files included
+# image file for ERD: erd_sh.jpg
+# table schemata file: table_schemata_sh.sql
+# query file: queries_sh.sql
+
+# Resources
+    Class notes
+    Instructor Tom Bogue
+    Classmates (including brief conversations with Lorenzo, Elisabeth, 
+        Jim, and Chelsea). 
+    Xpert Learning Assistant/ChatGPT
+    Coronel, C., Morris, S., & Rob, P. (2012). Database systems: Design, 
+        implementation, and management (10th ed.). Cengage Learning.
+    SQLtutorial.org
+    quickdatabasediagrams.com (for ERD)
+    pgAdmin4 for data analysis
+
 
 # Data Model
 Reviewed each .csv file to create logic model.
@@ -43,8 +62,7 @@ dept_manager.csv requires a composite key because an employee can manage
 multiple departments over time.
 
 salaries.csv requres a composite key because an employee can have more than
-one salarie over time.
-
+one salary over time.
 
 department.csv
 -dept_no varchar(10) PK
@@ -81,12 +99,51 @@ Creating the table schema, etc. in pgAdmin4
 working in PostgreSQL
 Database title: Pewlett Hackard
 Checking NOT NULL (determined based on PK, FK, and 
-mandatory values - all employee data required.)
+mandatory values - all employee.csv data required.)
+
+department.csv
+-dept_no VARCHAR(10) PRIMARY KEY
+-dept_name VARCHAR(50) NOT NULL
+
+titles.csv
+-title_id VARCHAR(20) PRIMARY KEY
+-title VARCHAR(50) NOT NULL
+
+employees.csv
+-emp_no VARCHAR(20) PRIMARY KEY
+-emp_title_id VARCHAR(20) NOT NULL
+-birth_date TIMESTAMP NOT NULL
+-first_name VARCHAR(50) NOT NULL
+-last_name VARCHAR(50) NOT NULL
+-sex CHAR(1) NOT NULL
+-hire_date TIMESTAMP NOT NULL
+-FOREIGN KEY (emp_title_id) REFERENCES titles(title_id)
+
+dept_emp.csv
+-emp_no VARCHAR(20) NOT NULL
+-dept_no VARCHAR(10) NOT NULL
+-PRIMARY KEY (emp_no, dept_no)
+-FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
+-FOREIGN KEY (dept_no) REFERENCES department(dept_no)
+
+dept_manager.csv
+-dept_no VARCHAR(10) NOT NULL
+-emp_no VARCHAR(20) NOT NULL
+-PRIMARY KEY (dept_no, emp_no)
+-FOREIGN KEY (dept_no) REFERENCES department(dept_no)
+-FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
+
+salaries.csv
+-emp_no VARCHAR(20) NOT NULL
+-salary INT NOT NULL
+-PRIMARY KEY (emp_no, salary)
+-FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
+
 
 Data imported.
 
 # Data Analysis
-
+Utilized pgAdmin4 to create queries for Data Analysis
 
 
 
